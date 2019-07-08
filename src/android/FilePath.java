@@ -45,6 +45,7 @@ public class FilePath extends CordovaPlugin {
     private static final String TAG = "[FilePath plugin]: ";
 
     private static final int INVALID_ACTION_ERROR_CODE = -1;
+    private static final int FILE_IO_ERROR = 6;
 
     private static final int GET_PATH_ERROR_CODE = 0;
     private static final String GET_PATH_ERROR_ID = null;
@@ -136,6 +137,12 @@ public class FilePath extends CordovaPlugin {
 
             this.callback.error(resultObj);
         }
+        else if (filePath.equals(FILE_IO_ERROR)) {
+            resultObj.put("code", FILE_IO_ERROR);
+            resultObj.put("message", "Cannot create temporary file.");
+
+            this.callback.error(resultObj);
+        }
         else {
             Log.d(TAG, "Filepath: " + filePath);
 
@@ -145,7 +152,6 @@ public class FilePath extends CordovaPlugin {
 
     public static String getFilePathFromURIOreo(Context context, Uri uri) {
       //copy file and send new file path
-      //String id = DocumentsContract.getDocumentId(uri);
       try {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         Random r = new Random();
@@ -155,7 +161,7 @@ public class FilePath extends CordovaPlugin {
         String filePath = file.getAbsolutePath();
         return filePath;
       } catch (FileNotFoundException e) {
-        //Error
+        return FILE_IO_ERROR;
       }
       return null;
     }
