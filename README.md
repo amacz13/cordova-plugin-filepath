@@ -5,6 +5,10 @@ URIs and is based on code in the [aFileChooser](https://github.com/iPaulPro/aFil
 
 Original inspiration [from StackOverflow](http://stackoverflow.com/questions/20067508/get-real-path-from-uri-android-kitkat-new-storage-access-framework).
 
+## Fork Infos
+
+This fork adds code to support Android Oreo and Pie.
+
 ## Installation
 
 ```bash
@@ -36,6 +40,7 @@ Possible error codes are:
 * ``-1`` - describes an invalid action
 * ``0`` - ``file://`` path could not be resolved
 * ``1`` - the native path links to a cloud file (e.g: from Google Drive app)
+* ``6`` - Unable to create temporary file.
 
 ## LICENSE
 
